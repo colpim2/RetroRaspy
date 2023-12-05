@@ -32,12 +32,6 @@ ninja
 sudo apt install xboxdrv
 sudo apt install joystick
 
-sudo xboxdrv --detach-kernel-driver --silent --mouse --mimic-xpad --mimic-xpad-wireless \
-  --axismap -Y1=Y1,-Y2=Y2 \
-  --buttonmap A=BTN_A,B=BTN_B,X=BTN_X,Y=BTN_Y,TL=BTN_TL,TR=BTN_TR,DU=KEY_UP,DD=KEY_DOWN,DL=KEY_LEFT,DR=KEY_RIGHT \
-  --trigger-as-button --trigger-buttonmap RT=BTN_LEFT \
-  --evdev-absmap ABS_X=X1,ABS_Y=Y1,ABS_Z=X2,ABS_RZ=Y2
-
 
 #=== SplashScreen ===
 #Libraries

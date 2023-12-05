@@ -1,24 +1,25 @@
+import threading
+import time
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
 import subprocess
 import os
+import pyudev
 
+# === Emulador ===
 def ejecutar_emulador():
     seleccion = lista.get(lista.curselection())
     if seleccion:
         etiqueta_juego.config(text=f"Ejecutando: {seleccion}")
-        ruta_rom = f"~/Emulador/Roms/'{seleccion}.sfc'"
-        ruta_ejecutable = "~/Emulador/snes9x-1.60/gtk/build/snes9x-gtk"
+        ruta_rom = f"/home/pi/Emulador/Roms/'{seleccion}.sfc'"
+        ruta_ejecutable = "/home/pi/Emulador/snes9x-1.60/gtk/build/snes9x-gtk"
 
         # Agregar las opciones de pantalla completa y dimensiones de ventana al comando del emulador
         comando = f"{ruta_ejecutable} {ruta_rom} --fullscreen"
 
         # Ejecutar el emulador en pantalla completa en un nuevo proceso
-        emulador = subprocess.Popen(comando, shell=True, cwd=os.path.join("snes9x-1.60", "gtk", "build"))
-
-        # Configurar la detección de la tecla 'p' para cerrar el emulador
-        keyboard.add_hotkey('p', lambda: emulador.terminate())
+        emulador = subprocess.Popen(comando, shell=True, cwd="/home/pi/Emulador/snes9x-1.60/gtk/build")
 
 def mostrar_juego_seleccionado(event):
     seleccion = lista.get(lista.curselection())
@@ -27,6 +28,53 @@ def mostrar_juego_seleccionado(event):
 def redimensionar_imagen(imagen_original, nuevo_ancho, nuevo_alto):
     return imagen_original.resize((nuevo_ancho, nuevo_alto), Image.ANTIALIAS)
 
+# === USB ===
+def function_two():
+    global devices
+    devices = []
+    
+    context = pyudev.Context()
+    monitor = pyudev.Monitor.from_netlink(context)
+    monitor.filter_by(subsystem="block", device_type="partition")
+    while True:
+        action, device = monitor.receive_device()
+        if action != "add":
+            continue
+        copy_files(device)
+        actualizar_lista_juegos()
+        time.sleep(1)
+
+
+def copy_files(dev):
+    time.sleep(15)       #Espera a que el sistema monte la usb
+    dirname = "/media/pi/MYLINUXLIVE/"
+    if os.path.exists(dirname):
+        for filename in os.listdir(dirname):
+            if filename.endswith(".srm"):
+                print("Copying file " + filename)
+                os.system("cp " + dirname + filename + "/home/pi/Emulador/Roms")
+            if filename.endswith(".sfc"):
+                print("Copying file " + filename)
+                os.system("cp " + dirname + filename + " /home/pi/Emulador/Roms")
+
+
+def actualizar_lista_juegos():
+    # Actualizar la lista de juegos en la interfaz gráfica
+    lista.delete(0, tk.END)  # Limpiar la lista actual
+
+    # Verificar si la carpeta existe
+    #if os.path.exists(ruta_carpeta) and os.path.isdir(ruta_carpeta):
+        # Iterar sobre los archivos en la carpeta
+    for archivo in os.listdir(ruta_carpeta):
+        # Verificar si el archivo termina con .sfc
+        if archivo.endswith(".sfc"):
+            # Obtener el nombre del archivo sin la extensión
+            nombre_sin_extension = os.path.splitext(archivo)[0]
+            archivos_sin_extension.append(nombre_sin_extension)
+            lista.insert(tk.END, nombre_sin_extension)
+    juegos = archivos_sin_extension
+
+# === MAIN ===
 # Crear la ventana principal
 ventana = tk.Tk()
 ventana.title("Emulador de SNES")
@@ -44,14 +92,21 @@ ancho_pantalla = ventana.winfo_screenwidth()
 alto_pantalla = ventana.winfo_screenheight()
 
 # Cargar la imagen de fondo y redimensionarla
-imagen_fondo_original = Image.open(os.path.join("src", "bootLogo.png"))
+# Obtén la ruta del script actual
+script_path = os.path.dirname(os.path.abspath(_file_))
+
+# Construye la ruta completa de la imagen en la carpeta "src"
+imagen_path = os.path.join(script_path, "src", "bootLogo.png")
+
+# Abre la imagen sin especificar el modo "rb"
+imagen_fondo_original = Image.open(imagen_path)
 imagen_fondo_redimensionada = redimensionar_imagen(imagen_fondo_original, ancho_pantalla, alto_pantalla)
 imagen_fondo = ImageTk.PhotoImage(imagen_fondo_redimensionada)
 label_fondo = tk.Label(ventana, image=imagen_fondo)
 label_fondo.place(relwidth=1.0, relheight=1.0)
 
 # Ruta de la carpeta que contiene los Roms
-ruta_carpeta = "Roms"
+ruta_carpeta = "/home/pi/Emulador/Roms"
 # Crear una lista con los primeros cinco juegos
 juegos = []
 archivos_sin_extension = []
@@ -60,17 +115,17 @@ fuente_lista = ("Helvetica", 16)
 altura_elemento_lista = 50
 
 # Verificar si la carpeta existe
-if os.path.exists(ruta_carpeta) and os.path.isdir(ruta_carpeta):
-    # Iterar sobre los archivos en la carpeta
-    for archivo in os.listdir(ruta_carpeta):
-        # Verificar si el archivo termina con .sfc
-        if archivo.endswith(".sfc"):
-            # Obtener el nombre del archivo sin la extensión
-            nombre_sin_extension = os.path.splitext(archivo)[0]
-            archivos_sin_extension.append(nombre_sin_extension)
+#if os.path.exists(ruta_carpeta) and os.path.isdir(ruta_carpeta):
+# Iterar sobre los archivos en la carpeta
+for archivo in os.listdir(ruta_carpeta):
+    # Verificar si el archivo termina con .sfc
+    if archivo.endswith(".sfc"):
+        # Obtener el nombre del archivo sin la extensión
+        nombre_sin_extension = os.path.splitext(archivo)[0]
+        archivos_sin_extension.append(nombre_sin_extension)
 
-    # Crear una lista con los nombres de archivos sin la extensión .sfc
-    juegos = archivos_sin_extension
+# Crear una lista con los nombres de archivos sin la extensión .sfc
+juegos = archivos_sin_extension
 
 # Crear una lista con una barra de desplazamiento
 lista = tk.Listbox(ventana, font=fuente_lista, selectbackground="#4CAF50", selectforeground="white", borderwidth=0, relief="flat", activestyle="none", height=5)
@@ -96,7 +151,11 @@ lista.bind("<<ListboxSelect>>", mostrar_juego_seleccionado)
 boton_ejecutar_emulador = ttk.Button(ventana, text="Jugar", style="Boton.TButton", command=ejecutar_emulador)
 boton_ejecutar_emulador.place(relx=0.5, rely=0.8, anchor='center')  # Centrar el botón horizontalmente
 
+# Create threads
+thread = threading.Thread(target=function_two)
+
+# Start threads
+thread.start()
+
 # Iniciar el bucle de eventos
 ventana.mainloop()
-
-
