@@ -14,28 +14,33 @@ Este archivo proporciona instrucciones detalladas sobre cómo configurar y utili
 - Navega a Preferences > Screen Resolution.
 - Selecciona la pantalla a utilizar y configura la resolución adecuada.
 
-## 3. Snes9x Emulator
+
+## 3. Descargar RetroRaspy
+
+- Ejecuta `wget https://github.com/colpim2/RetroRaspy` en la terminal.
+
+## 4. Snes9x Emulator
 
 - El emulador se descarga y compila automáticamente.
 - Abre la terminal y ejecuta "Project.sh" para iniciar la instalación.
 
-## 4. ROMs
+## 5. ROMs
 
 - Si deseas descargar ROMs, asegúrate de que el nombre del archivo cumpla con las siguientes características:
   - No debe contener espacios.
   - Debe tener la terminación .sfc o .srm.
 
-## 5. Configuración del Control
+## 6. Configuración del Control
 
 - Se ha asignado automáticamente los botones para funcionar con un control de Xbox One conectado por cable.
   - **Nota:** Conecta el control antes de encender la Raspberry Pi.
 - También es compatible con el uso de mouse y teclado.
 
-## 6. Arranque Directo al Emulador
+## 7. Arranque Directo al Emulador
 
-## 7. Gestión de ROMs desde USB
+## 8. Gestión de ROMs desde USB
 
-## 8. Configuración de Animación de Arranque "RetroRaspy"
+## 9. Configuración de Animación de Arranque "RetroRaspy"
 
 - Desactiva el "rainbow splash".
   - Ejecuta `sudo nano /boot/config.txt` en la terminal.
