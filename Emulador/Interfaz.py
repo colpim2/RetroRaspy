@@ -92,11 +92,8 @@ ancho_pantalla = ventana.winfo_screenwidth()
 alto_pantalla = ventana.winfo_screenheight()
 
 # Cargar la imagen de fondo y redimensionarla
-# Obtén la ruta del script actual
-script_path = os.path.dirname(os.path.abspath(_file_))
-
 # Construye la ruta completa de la imagen en la carpeta "src"
-imagen_path = os.path.join(script_path, "src", "bootLogo.png")
+imagen_path = "/home/pi/Emulador/src/bootLogo.png"
 
 # Abre la imagen sin especificar el modo "rb"
 imagen_fondo_original = Image.open(imagen_path)

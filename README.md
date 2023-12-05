@@ -27,7 +27,7 @@ Este archivo proporciona instrucciones detalladas sobre cómo configurar y utili
 ## 5. ROMs
 
 - Si deseas descargar ROMs, asegúrate de que el nombre del archivo cumpla con las siguientes características:
-  - No debe contener espacios.
+  - De preferencia evitar que contenga espacios y caracteres especiales.
   - Debe tener la terminación .sfc o .srm.
 
 ## 6. Configuración del Control
@@ -39,6 +39,13 @@ Este archivo proporciona instrucciones detalladas sobre cómo configurar y utili
 ## 7. Arranque Directo al Emulador
 
 ## 8. Gestión de ROMs desde USB
+
+- Inserta la USB despues de iniciar el sistema
+
+- Para que las ROMs dentro de tu USB sean detectadas asegúrate de que el nombre del archivo cumpla con las siguientes características:
+  - No debe contener espacios, caracteres especiales.
+    - Limita el nombre de letras y números.
+  - Debe tener la terminación .sfc o .srm.
 
 ## 9. Configuración de Animación de Arranque "RetroRaspy"
 
