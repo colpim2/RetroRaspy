@@ -41,7 +41,6 @@ Este archivo proporciona instrucciones detalladas sobre cómo configurar y utili
 ## 8. Gestión de ROMs desde USB
 
 - Inserta la USB despues de iniciar el sistema
-
 - Para que las ROMs dentro de tu USB sean detectadas asegúrate de que el nombre del archivo cumpla con las siguientes características:
   - No debe contener espacios, caracteres especiales.
     - Limita el nombre de letras y números.
