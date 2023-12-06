@@ -6,7 +6,7 @@ from PIL import Image, ImageTk
 import subprocess
 import os
 import pyudev
-
+temp = ""
 # === Emulador ===
 def ejecutar_emulador():
     seleccion = lista.get(lista.curselection())
@@ -47,24 +47,25 @@ def function_two():
 
 def copy_files(dev):
     time.sleep(15)       #Espera a que el sistema monte la usb
-    dirname = "/media/pi/MYLINUXLIVE/"
-    if os.path.exists(dirname):
-        for filename in os.listdir(dirname):
-            if filename.endswith(".srm"):
-                print("Copying file " + filename)
-                os.system("cp " + dirname + filename + "/home/pi/Emulador/Roms")
-            if filename.endswith(".sfc"):
-                print("Copying file " + filename)
-                os.system("cp " + dirname + filename + " /home/pi/Emulador/Roms")
+    dirname = "/media/pi/"
+    for d in os.listdir(dirname):
+        if os.path.exists(dirname + d):
+            for filename in os.listdir(dirname + d):
+                
+                if filename.endswith(".srm"):
+                    print(f"{dirname}{d}/'{filename}'")
+                    print("Copying file " + filename)
+                    os.system("cp " +f"{dirname}{d}/'{filename}'"+ " /home/pi/Emulador/Roms")
+                if filename.endswith(".sfc"):
+                    print(f"{dirname}{d}/'{filename}'")
+                    print("Copying file " + filename)
+                    os.system("cp "+f"{dirname}{d}/'{filename}'"+ " /home/pi/Emulador/Roms")
 
 
 def actualizar_lista_juegos():
     # Actualizar la lista de juegos en la interfaz gráfica
     lista.delete(0, tk.END)  # Limpiar la lista actual
-
-    # Verificar si la carpeta existe
-    #if os.path.exists(ruta_carpeta) and os.path.isdir(ruta_carpeta):
-        # Iterar sobre los archivos en la carpeta
+     # Iterar sobre los archivos en la carpeta
     for archivo in os.listdir(ruta_carpeta):
         # Verificar si el archivo termina con .sfc
         if archivo.endswith(".sfc"):
@@ -92,6 +93,8 @@ ancho_pantalla = ventana.winfo_screenwidth()
 alto_pantalla = ventana.winfo_screenheight()
 
 # Cargar la imagen de fondo y redimensionarla
+# Obtén la ruta del script actual
+
 # Construye la ruta completa de la imagen en la carpeta "src"
 imagen_path = "/home/pi/Emulador/src/bootLogo.png"
 
@@ -112,7 +115,6 @@ fuente_lista = ("Helvetica", 16)
 altura_elemento_lista = 50
 
 # Verificar si la carpeta existe
-#if os.path.exists(ruta_carpeta) and os.path.isdir(ruta_carpeta):
 # Iterar sobre los archivos en la carpeta
 for archivo in os.listdir(ruta_carpeta):
     # Verificar si el archivo termina con .sfc
