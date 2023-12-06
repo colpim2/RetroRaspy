@@ -1,3 +1,7 @@
+# LICENSE MIT
+# AUTORES:
+- Castillo Montes Pamela
+- Cruz Cedillo Daniel Alejandro
 # RetroRaspy
 
 Este archivo proporciona instrucciones detalladas sobre cómo configurar y utilizar RetroRaspy en tu Raspberry Pi. Sigue estos pasos para garantizar el correcto funcionamiento del proyecto.
