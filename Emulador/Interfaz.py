@@ -1,3 +1,11 @@
+#Interfaz de la consola retro, y copiado de roms desde la usb
+# Licencia: MIT
+# Creado por:
+#   - Castillo Montes Pamela
+#   - Cruz Cedillo Daniel Alejandro
+# Fecha: 2023.12.05
+
+
 import threading
 import time
 import tkinter as tk
