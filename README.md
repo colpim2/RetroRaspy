@@ -48,10 +48,10 @@ Este archivo proporciona instrucciones detalladas sobre cómo configurar y utili
 
 - Crear carpetas /lxsession/LXDE-pi y copiar el archivo autostart
   - mkdir -p /home/pi/.config/lxsession/LXDE-pi
-  - cp / etc / xdg / lxsession / LXDE - pi / autostart / home / pi /. config / lxsession / LXDE - pi /
+  - cp /etc/xdg/lxsession/LXDE-pi/autostart /home/pi/.config/lxsession/LXDE-pi/
 - Editar el archivo 
-  - nano / home / pi /. config / lxsession / LXDE - pi / autostart
-  - Agregar al final del archivo: @python3 / home / pi / RetroRaspy / Emulador / Interfaz . py
+  - nano /home/pi/.config/lxsession/LXDE-pi/autostart
+  - Agregar al final del archivo: @python3 /home/pi/RetroRaspy/Emulador/Interfaz.py
 
 ## 8. Gestión de ROMs desde USB
 
