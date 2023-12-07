@@ -1,15 +1,14 @@
 #!/bin/bash
+# Licencia: MIT
+# Creado por:
+#   - Castillo Montes Pamela
+#   - Cruz Cedillo Daniel Alejandro
+# Fecha: 2023.12.05
 
-#Permisos de Ejecución 
-#chmod u+rwx primer_script
-
-#Raspbian OS
-
-#Update
+#=== Update y descarga de proyecto === 
 sudo apt update
-
-#=== Seccion para que descargue nuestro proyecto desde github
-#wget https://github.com/
+cd /home/pi/
+wget https://github.com/colpim2/RetroRaspy
 
 
 #=== Emulador === 
@@ -18,19 +17,19 @@ sudo apt install libsdl2-dev libgtkmm-3.0-dev libepoxy-dev meson alsa-oss portau
 sudo apt-get install ninja-build
 
 #Project
+cd /home/pi/RetroRaspy/Emulador/
 wget https://github.com/snes9xgit/snes9x/archive/refs/tags/1.60.tar.gz
 tar -xzf 1.60.tar.gz
 cd snes9x-1.60/gtk
 meson build --buildtype=release –-strip
 cd build
 ninja
-#./snes9x-gtk
 
 #=== Control ===
-
 #Libraries 
 sudo apt install xboxdrv
 sudo apt install joystick
+sudo cp /home/pi/RetroRaspy/snes9x.conf /home/pi/.config/snes9x/
 
 
 #=== SplashScreen ===
@@ -56,9 +55,8 @@ sudo apt-get install fbi
 #[Install]
 #WantedBy=sysinit.target
 
-sudo cp splashscreen.service /etc/systemd/system/
-sudo systemctl enable splashscreen
-
+#sudo cp splashscreen.service /etc/systemd/system/
+#sudo systemctl enable splashscreen
 
 # === Interfaz === 
 sudo apt-get install python3-pil python3-pil.imagetk
