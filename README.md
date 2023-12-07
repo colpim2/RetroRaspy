@@ -1,4 +1,3 @@
-# LICENSE MIT
 # AUTORES:
 - Castillo Montes Pamela
 - Cruz Cedillo Daniel Alejandro
@@ -9,7 +8,7 @@ Este archivo proporciona instrucciones detalladas sobre cómo configurar y utili
 ## 1. Instalación del Sistema Operativo
 
 - Instala Raspbian OS 64 bits con escritorio en tu Raspberry Pi.
-  - **Recomendación:** Utiliza Raspberry Pi Imager para flashear una microSD de al menos X GB.
+  - **Recomendación:** Utiliza Raspberry Pi Imager para flashear una microSD de al menos 8 GB.
   - Configura el acceso a internet en tu dispositivo.
 
 ## 2. Configuración de Resolución de Pantalla
@@ -33,6 +32,8 @@ Este archivo proporciona instrucciones detalladas sobre cómo configurar y utili
 - Si deseas descargar ROMs, asegúrate de que el nombre del archivo cumpla con las siguientes características:
   - De preferencia evitar que contenga espacios y caracteres especiales.
   - Debe tener la terminación .sfc o .srm.
+  - Para agregarlas sera necesario hacerlo por USB
+  - Viene precargada con 15 ROMs
 
 ## 6. Configuración del Control
 
@@ -41,16 +42,17 @@ Este archivo proporciona instrucciones detalladas sobre cómo configurar y utili
 - También es compatible con el uso de mouse y teclado.
 
 ## 7. Arranque Directo al Emulador
+- Una vez instalada la consola la ejecucion se inicara de forma automatica al prenderla raspberry
 
 ## 8. Gestión de ROMs desde USB
 
 - Inserta la USB despues de iniciar el sistema
-- Para que las ROMs dentro de tu USB sean detectadas asegúrate de que el nombre del archivo cumpla con las siguientes características:
-  - No debe contener espacios, caracteres especiales.
-    - Limita el nombre de letras y números.
-  - Debe tener la terminación .sfc o .srm.
+- Debe tener la terminación .sfc o .srm.
 
 ## 9. Configuración de Animación de Arranque "RetroRaspy"
+
+- La Raspberry tendra una pequeña imagen al encender que sera diferente a la que viene por default.
+- Esta parte sera necesario realizarla de forma manual
 
 - Desactiva el "rainbow splash".
   - Ejecuta `sudo nano /boot/config.txt` en la terminal.
