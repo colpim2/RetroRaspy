@@ -1,6 +1,9 @@
 # AUTORES:
 - Castillo Montes Pamela
 - Cruz Cedillo Daniel Alejandro
+
+Ultima actualización: 6/12/2023
+
 # RetroRaspy
 
 Este archivo proporciona instrucciones detalladas sobre cómo configurar y utilizar RetroRaspy en tu Raspberry Pi. Sigue estos pasos para garantizar el correcto funcionamiento del proyecto.
@@ -42,7 +45,13 @@ Este archivo proporciona instrucciones detalladas sobre cómo configurar y utili
 - También es compatible con el uso de mouse y teclado.
 
 ## 7. Arranque Directo al Emulador
-- Una vez instalada la consola la ejecucion se inicara de forma automatica al prenderla raspberry
+
+- Crear carpetas /lxsession/LXDE-pi y copiar el archivo autostart
+  - mkdir -p /home/pi/.config/lxsession/LXDE-pi
+  - cp / etc / xdg / lxsession / LXDE - pi / autostart / home / pi /. config / lxsession / LXDE - pi /
+- Editar el archivo 
+  - nano / home / pi /. config / lxsession / LXDE - pi / autostart
+  - Agregar al final del archivo: @python3 / home / pi / RetroRaspy / Emulador / Interfaz . py
 
 ## 8. Gestión de ROMs desde USB
 
@@ -61,3 +70,7 @@ Este archivo proporciona instrucciones detalladas sobre cómo configurar y utili
 - Ejecuta `sudo nano /boot/cmdline.txt` en la terminal.
   - Agrega: `console=tty3 splash loglevel=3 logo.nologo vt.global_cursor_default=0 plymouth.enable=0`.
   - Guarda el archivo.
+
+## Video del funcionamiento
+
+https://youtu.be/joAE9GTj6x8
